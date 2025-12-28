@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/flexboxes.css">
+    <link rel="stylesheet" href="assets/nav.css">
+    <link rel="stylesheet" href="assets/typography.css">
+
+    <!-- Cookie CSS (mag ook in styles.css) -->
+    <style>
+        #cookie-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cookie-modal {
+            background: #ffffff;
+            padding: 24px 28px;
+            max-width: 520px;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cookie-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .cookie-buttons button {
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+
+        .cookie-buttons .primary {
+            background: #1a73e8;
+            color: white;
+            border: none;
+        }
+
+        .cookie-buttons .secondary {
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ⭐ COOKIE VENSTER -->
+<div id="cookie-overlay">
+    <div id="cookie-modal">
+        <h2>Voordat u doorgaat</h2>
+        <p>
+            Deze website gebruikt cookies en vergelijkbare technologieën om de
+            website goed te laten functioneren.
+        </p>
+
+        <div class="cookie-buttons">
+            <button class="secondary">Bekijk meer</button>
+            <button class="primary" onclick="closeCookie()">Ik ga akkoord</button>
+        </div>
+    </div>
+</div>
+
+<!-- ⭐ NAVIGATION BAR -->
+<nav class="navbar">
+    <div class="nav-title">Nia Chawla | 1GDM1 | Lost in Tra(i)nslation</div>
+    <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="week1.html">week1</a></li>
+        <li><a href="week2.html">week2</a></li>
+        <li><a href="week3.html">week3</a></li>
+        <li><a href="week4.html">week4</a></li>
+        <li><a href="week5.html">week5</a></li>
+        <li><a href="week6.html">week6</a></li>
+        <li><a href="week7.html">week7</a></li>
+        <li><a href="week8.html">week8</a></li>
+        <li><a href="week9.html">week9</a></li>
+        <li><a href="week10.html">week10</a></li>
+        <li><a href="week11.html">week11</a></li>
+    </ul>
+</nav>
+
+<!-- ⭐ HERO SECTION -->
+<section class="hero">
+    <h1>Home</h1>
+</section>
+
+<!-- ⭐ CONTENT -->
+<div class="container">
+    <h2>Welkom</h2>
+
+    <button class="opdracht-btn" onclick="openOpdrachtModal()">
+        Opdracht
+    </button>
+
+    <div class="two-columns">
+        <div class="column"></div>
+        <div class="column"></div>
+    </div>
+</div>
+
+<!-- ⭐ OPDRACHT MODAL -->
+<div id="opdrachtModal" class="modal">
+    <div class="modal-inner">
+        <span class="close" onclick="closeOpdrachtModal()">&times;</span>
+
+        <div class="modal-text wide">
+            <h2>Opdracht</h2>
+            <p>
+                De opdracht draait om het ontwerpen van drie types informatieschermen
+                voor een Belgisch treinstation (vertrekborden, perronschermen en
+                passagiers-/wegwijsschermen).
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ⭐ SCRIPTS -->
+<script>
+    // Opdracht modal
+    function openOpdrachtModal() {
+        document.getElementById("opdrachtModal").style.display = "flex";
+    }
+
+    function closeOpdrachtModal() {
+        document.getElementById("opdrachtModal").style.display = "none";
+    }
+
+    document.getElementById("opdrachtModal").addEventListener("click", (e) => {
+        if (e.target.id === "opdrachtModal") {
+            closeOpdrachtModal();
+        }
+    });
+
+    // Cookie logic
+    document.addEventListener("DOMContentLoaded", function () {
+        const overlay = document.getElementById("cookie-overlay");
+        const cookieAccepted = localStorage.getItem("cookieAccepted");
+
+        if (cookieAccepted !== "true") {
+            overlay.style.display = "flex";
+        }
+    });
+
+    function closeCookie() {
+        localStorage.setItem("cookieAccepted", "true");
+        document.getElementById("cookie-overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

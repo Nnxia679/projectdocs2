@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS</title>
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/flexboxes.css">
+    <link rel="stylesheet" href="assets/nav.css">
+    <link rel="stylesheet" href="assets/typography.css">
+</head>
+<body>
+              <!-- ⭐ NAVIGATION BAR -->
+    <nav class="navbar">
+            <div class="nav-title">Nia Chawla | 1GDM1 | Lost in Tra(i)nslation</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="week1.html">Week1</a></li>
+            <li><a href="week2.html">Week2</a></li>
+            <li><a href="week3.html">Week3</a></li>
+            <li><a href="week4.html">Week4</a></li>
+            <li><a href="week5.html">Week5</a></li>
+            <li><a href="week6.html">Week6</a></li>
+            <li><a href="week7.html">Week7</a></li>
+            <li><a href="week8.html">Week8</a></li>
+            <li><a href="week9.html">week9</a></li>
+            <li><a href="week10.html">week10</a></li>
+            <li><a href="week11.html">week11</a></li>       
+        </ul>
+    </nav>
+
+    <!-- ⭐ HERO SECTION -->
+    <section class="hero">
+        <h1>Week 10</h1>
+    </section>
+
+    <!-- ⭐ CONTENT -->
+    <div class="container">
+        <h2>Html</h2>
+        <p>Visual studio code: javascripts-basics & interactiviteit knoppen en eenvoudige interacties programmeren </p>
+
+        <div class="screens-row">
+            <img src="assets/treinscherm4.jpg" class="thumb"
+                 data-text="Het eerste werkende tailwind document, vanaf hier kan ik mijn website gaan bouwen. Ik gooi mijn website document in het tailwind document en begin meer aanpassingen te maken. Werkende knoppen, werkende weken, home knop.">
+                 <img src="assets/treinscherm5.jpg" class="thumb"
+                 data-text="Het eerste werkende tailwind document, vanaf hier kan ik mijn website gaan bouwen. Ik gooi mijn website document in het tailwind document en begin meer aanpassingen te maken. Werkende knoppen, werkende weken, home knop.">
+        </div>
+
+    </div>
+
+    <!-- ⭐ MODAL -->
+    <div id="imgModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="arrow left" onclick="prevImage()">&#10094;</span>
+        <span class="arrow right" onclick="nextImage()">&#10095;</span>
+
+        <div class="modal-inner">
+            <img class="modal-content" id="modalImage">
+            <div class="modal-text" id="modalText"></div>
+        </div>
+    </div>
+
+    <script>
+        const images = Array.from(document.querySelectorAll('.thumb'));
+        let currentIndex = 0;
+
+        images.forEach((img, index) => {
+            img.addEventListener("click", () => {
+                currentIndex = index;
+                openModal(img.src, img.dataset.text);
+            });
+        });
+
+        function openModal(src, text) {
+            document.getElementById("modalImage").src = src;
+            document.getElementById("modalText").textContent = text;
+            document.getElementById("imgModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imgModal").style.display = "none";
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            const img = images[currentIndex];
+            openModal(img.src, img.dataset.text);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            const img = images[currentIndex];
+            openModal(img.src, img.dataset.text);
+        }
+
+        document.getElementById("imgModal").addEventListener("click", (e) => {
+            if (e.target.id === "imgModal") closeModal();
+        });
+    </script>
+
+</body>
+</html>

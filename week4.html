@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/flexboxes.css">
+    <link rel="stylesheet" href="assets/nav.css">
+    <link rel="stylesheet" href="assets/typography.css">
+
+    <style>
+        .screens-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .thumb {
+            width: 160px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        .thumb:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-inner {
+            display: flex;
+            gap: 20px;
+            background: rgba(39, 38, 38, 0.37);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        /* Zorg dat modal BOVEN de navbar komt */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* hoger dan navbar */
+}
+
+/* Afbeelding mooi laten passen */
+.modal-content {
+    width: auto;
+    height: auto;
+    max-width: 90vw;   /* veel breder */
+    max-height: 90vh;  /* iets hoger */
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Close button altijd zichtbaar */
+.close {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 45px;
+    color: white;
+    cursor: pointer;
+    z-index: 999999; /* helemaal bovenaan */
+
+        }
+
+        .modal-text {
+            width: 250px;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .arrow {
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .left { left: 30px; }
+        .right { right: 30px; }
+    </style>
+</head>
+
+<body>
+
+    <!-- ⭐ NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-title">Nia Chawla | 1GDM1 | Lost in Tra(i)nslation</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="week1.html">Week1</a></li>
+            <li><a href="week2.html">Week2</a></li>
+            <li><a href="week3.html">Week3</a></li>
+            <li><a href="week4.html">Week4</a></li>
+            <li><a href="week5.html">Week5</a></li>
+            <li><a href="week6.html">Week6</a></li>
+            <li><a href="week7.html">Week7</a></li>
+            <li><a href="week8.html">Week8</a></li>
+            <li><a href="week9.html">week9</a></li>
+            <li><a href="week10.html">week10</a></li>
+            <li><a href="week11.html">week11</a></li>
+        </ul>
+    </nav>
+
+    <!-- ⭐ HERO SECTION -->
+    <section class="hero">
+        <h1>Week 4</h1>
+    </section>
+
+    <!-- ⭐ CONTENT -->
+    <div class="container">
+        <h2>Mid-fi</h2>
+        <p>Verder werken aan de figma schermen, mid-fidelity.</p>
+
+        <div class="screens-row">
+            <img src="assets/treinscherm1.jpg" class="thumb"
+                 data-text="Eerste mid-fi treinscherm met duidelijke secties en iconen. De verschillende locaties, perron nummers en trein nummers zijn duidelijk. De kleuren rood en groen tonen aan of het te laat is of gewoon op tijd.">
+            <img src="assets/treinscherm2.jpg" class="thumb"
+                 data-text="Mid-fi perronbord met een soort trap indeling. Simpel en duidelijk. Bestemmingen, trein nummers, tijden, status, allemaal aanwezig. Het nodige is er dus, het kon wel veel gedetailleerder.">
+            <img src="assets/treinscherm3.jpg" class="thumb"
+                 data-text="Zeer nuchter en saai wagonscherm. Het kon absoluut beter en dat is het ook geworden in mijn high-fi figma ontwerp. De info is er wel, maar de layout en kleuren zijn niet aantrekkelijk.">
+        </div>
+
+    </div>
+
+    <!-- ⭐ MODAL -->
+    <div id="imgModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="arrow left" onclick="prevImage()">&#10094;</span>
+        <span class="arrow right" onclick="nextImage()">&#10095;</span>
+
+        <div class="modal-inner">
+            <img class="modal-content" id="modalImage">
+            <div class="modal-text" id="modalText"></div>
+        </div>
+    </div>
+
+    <script>
+        const images = Array.from(document.querySelectorAll('.thumb'));
+        let currentIndex = 0;
+
+        images.forEach((img, index) => {
+            img.addEventListener("click", () => {
+                currentIndex = index;
+                openModal(img.src, img.dataset.text);
+            });
+        });
+
+        function openModal(src, text) {
+            document.getElementById("modalImage").src = src;
+            document.getElementById("modalText").textContent = text;
+            document.getElementById("imgModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imgModal").style.display = "none";
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            const img = images[currentIndex];
+            openModal(img.src, img.dataset.text);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            const img = images[currentIndex];
+            openModal(img.src, img.dataset.text);
+        }
+
+        document.getElementById("imgModal").addEventListener("click", (e) => {
+            if (e.target.id === "imgModal") closeModal();
+        });
+    </script>
+
+</body>
+</html>
