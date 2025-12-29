@@ -1,0 +1,114 @@
+/* --- Modal overlay --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 1000;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- Inner container: image + text naast elkaar --- */
+.modal-inner {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    max-width: 90%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* --- Het beeld in de modal --- */
+.modal-content {
+    max-width: 60%;
+    max-height: 80%;
+    border-radius: 10px;
+    background: transparent;
+    display: flex;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* --- Tekstvak naast afbeelding --- */
+.modal-text {
+    max-width: 30%;
+    color: white;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+
+/* --- Pijltjes links/rechts --- */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.arrow:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+.arrow.left {
+    left: 20px;
+}
+
+.arrow.right {
+    right: 20px;
+}
+
+/* --- Responsive tweaks voor mobiel --- */
+@media (max-width: 768px) {
+    .modal-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+
+    .modal-text {
+        max-width: 90%;
+    }
+}
+/* —————  Modal afbeelding kleiner maken ————— */
+
+.modal img {
+    max-width: 80%;      /* afbeelding wordt kleiner */
+    max-height: 80vh;    /* nooit hoger dan het scherm */
+    object-fit: contain; /* verhoudingen blijven goed */
+    margin: auto;
+    display: block;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
